@@ -1,23 +1,22 @@
 import logo from './logo.svg';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
+import Products from './components/products';
 import './App.css';
+import Dashboard from './components/dashboard';
+import Cart from './components/cart';
 
 function App() {
+  const router = createBrowserRouter(createRoutesFromElements(
+    <Route path="/" element={<Dashboard/>}>
+      <Route index element={<Products/>}/>
+      <Route path="cart" element={<Cart/>}/>
+    </Route>
+  ));
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouterProvider router={router}/>
     </div>
   );
 }
